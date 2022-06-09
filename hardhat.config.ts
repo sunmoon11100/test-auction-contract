@@ -30,33 +30,47 @@ const config: HardhatUserConfig = {
       url: "http://127.0.0.1:8545",
     },
     hardhat: {},
-    testnet: {
+    bscTestnet: {
       url: "https://data-seed-prebsc-1-s1.binance.org:8545",
       chainId: 97,
       gasPrice: 20000000000,
       accounts:
         process.env.PRIVATE_KEY !== undefined ? [process.env.PRIVATE_KEY] : [],
     },
-    mainnet: {
+    bsc: {
       url: "https://bsc-dataseed.binance.org/",
       chainId: 56,
       gasPrice: 20000000000,
       accounts:
         process.env.PRIVATE_KEY !== undefined ? [process.env.PRIVATE_KEY] : [],
     },
-    rinkedby: {
+    rinkeby: {
       url: process.env.RINKEDBY_URL || "",
+      accounts:
+        process.env.PRIVATE_KEY !== undefined ? [process.env.PRIVATE_KEY] : [],
+    },
+    polygon: {
+      url: "https://rpc-mainnet.matic.network",
+      accounts:
+        process.env.PRIVATE_KEY !== undefined ? [process.env.PRIVATE_KEY] : [],
+    },
+    polygonMumbai: {
+      url: "https://matic-mumbai.chainstacklabs.com",
       accounts:
         process.env.PRIVATE_KEY !== undefined ? [process.env.PRIVATE_KEY] : [],
     },
   },
   solidity: {
-    version: "0.8.4",
-    settings: {
-      optimizer: {
-        enabled: true,
+    compilers: [
+      {
+        version: "0.8.9",
+        settings: {
+          optimizer: {
+            enabled: true,
+          },
+        },
       },
-    },
+    ],
   },
   paths: {
     sources: "./contracts",
@@ -72,7 +86,13 @@ const config: HardhatUserConfig = {
     currency: "USD",
   },
   etherscan: {
-    apiKey: process.env.ETHERSCAN_API_KEY,
+    apiKey: {
+      bsc: process.env.BSCSCAN_API_KEY,
+      bscTestnet: process.env.BSCSCAN_API_KEY,
+      rinkeby: process.env.ETHERSCAN_API_KEY,
+      polygon: process.env.POLYGONSCAN_API_KEY,
+      polygonMumbai: process.env.POLYGONSCAN_API_KEY,
+    },
   },
 };
 
