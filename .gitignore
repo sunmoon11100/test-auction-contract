@@ -1,0 +1,13 @@
+node_modules
+.env
+coverage
+coverage.json
+typechain-types
+.idea
+.openzeppelin
+
+#Hardhat files
+cache
+artifacts
+
+yarn.lock
